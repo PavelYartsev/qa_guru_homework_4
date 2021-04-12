@@ -12,9 +12,9 @@ import static data.TestData.*;
 
 public class StudentRegistrationFormPage {
 
-    public void openPageAndCheckHeader(String siteUrl, SelenideElement pageHeaderLocator, String headerText) {
+    public void openPageAndCheckHeader(String siteUrl, String headerText) {
         open(siteUrl);
-        checkHeader(pageHeaderLocator, headerText);
+        checkHeader(headerText);
     }
 
     public void fillForm(Map<String, String> studentData) {
@@ -23,7 +23,7 @@ public class StudentRegistrationFormPage {
         fillTextInput(emailInputLocator, studentData.get("Email"));
         clickElementWithText(parentElementLocatorGender, studentData.get("Gender"));
         fillTextInput(phoneLocator, studentData.get("Mobile Phone"));
-        setDate(dateOfBirthInputLocator, birthYearLocator, birthMonthLocator, studentData.get("Year of Birth"), studentData.get("Month of Birth"), studentData.get("Day of Birth"));
+        setDate(studentData.get("Year of Birth"), studentData.get("Month of Birth"), studentData.get("Day of Birth"));
         fillAutocompleteInput(subjectInputLocator, studentData.get("Short Subject 1"), studentData.get("Subject 1"));
         fillAutocompleteInput(subjectInputLocator, studentData.get("Short Subject 2"), studentData.get("Subject 2"));
         clickElementWithText(parentElementLocatorHobby, studentData.get("Hobby 1"));
@@ -35,7 +35,7 @@ public class StudentRegistrationFormPage {
         buttonClick(submitButtonLocator);
     }
 
-    public void checkFilledData(SelenideElement modalForCheckingLocator, Map<String, String> studentData, SelenideElement closeLargeModalLocator) {
+    public void checkFilledData(Map<String, String> studentData) {
         modalForCheckingLocator.shouldHave(text(studentData.get("First Name")), text(studentData.get("Last Name")),
                 text(studentData.get("Email")), text(studentData.get("Gender")), text(studentData.get("Mobile Phone")),
                 text(studentData.get("Subject 1")), text(studentData.get("Subject 2")), text(studentData.get("Hobby 1")),
@@ -44,14 +44,14 @@ public class StudentRegistrationFormPage {
         closeLargeModalLocator.click();
     }
 
-    public void setDate(SelenideElement dateOfBirthInputLocator, SelenideElement birthYearLocator, SelenideElement birthMonthLocator, String year, String month, String day) {
+    public void setDate(String year, String month, String day) {
         dateOfBirthInputLocator.click();
         birthYearLocator.selectOptionByValue(year);
         birthMonthLocator.selectOptionByValue(month);
         $(byText(day)).click();
     }
 
-    public void checkHeader(SelenideElement pageHeaderLocator, String headerText) {
+    public void checkHeader(String headerText) {
         pageHeaderLocator.shouldHave(text(headerText));
     }
 

@@ -18,8 +18,8 @@ public class StudentRegistrationFormTests {
 
     @Test
     void fillStudentRegistrationForm() {
-        studentRegistrationFormPage.openPageAndCheckHeader(siteUrl, pageHeaderLocator, headerText);
+        studentRegistrationFormPage.openPageAndCheckHeader(siteUrl, headerText);
         studentRegistrationFormPage.fillForm(studentData);
-        studentRegistrationFormPage.checkFilledData(modalForCheckingLocator,studentData,closeLargeModalLocator);
+        studentRegistrationFormPage.checkFilledData(studentData);
     }
 }
